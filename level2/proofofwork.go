@@ -24,6 +24,7 @@ type ProofOfWork struct {
 func NewProofOfWork(b *Block) *ProofOfWork {
 	target := big.NewInt(1)
 	target.Lsh(target, uint(256-targetBits))
+	fmt.Println("target======", target)
 
 	pow := &ProofOfWork{b, target}
 
@@ -51,7 +52,7 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 	var hash [32]byte
 	nonce := 0
 
-	fmt.Printf("Mining the block containing \"%s\"\n", pow.block.Data)
+	fmt.Printf("Mining the block containing \"%s\"maxNonce=%d\n", pow.block.Data, maxNonce)
 	for nonce < maxNonce {
 		data := pow.prepareData(nonce)
 
